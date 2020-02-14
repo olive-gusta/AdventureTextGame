@@ -1,3 +1,5 @@
-indice;text;cords;com
-1;"texto 1 aqui";(N,S,L,O);(commnads) 
-2;"texto 2 aqui";(N,S,L,O);(commnads) 
+#indice;text;cords;N,;S;L;O;com
+#0 means "you can't go this way"
+0;"texto 1 aqui";1;2;0;0;True
+1;"texto 2 aqui";1;0;1;1;True 
+2;"texto 3 aqui";0;2;2;2;True
