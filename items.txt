@@ -1,0 +1,4 @@
+#aqui definimos os items presentes dentro do jogo
+#Nome;Tipo;Usar;Beber;Equipar;Largar;Puxar;Empurrar;Abrir;Olhar
+espada;personagem;False;False;True;True;False;False;False;E uma espada
+escudo;personagem;False;False;True;True;False;False;False;E um escudo
