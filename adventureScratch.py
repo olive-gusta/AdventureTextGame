@@ -9,7 +9,7 @@ arquivo = np.genfromtxt("cenas.txt", delimiter=";", comments="#", dtype=[   ('id
                                                                             ('O',int),
                                                                             ('subir',int), 
                                                                             ('descer',int), 
-                                                                            ('com',bool)
+                                                                            ('item',"|U10")
                                                                         ]
                         )
 
@@ -28,23 +28,29 @@ arquivo_item = np.genfromtxt("items.txt", delimiter=";", comments="#", dtype=[
                             )
 
 #precisamos de uma função que sempre escuta o que o jogador tem a dizer
-print(arquivo_item[0])
-def file_find(cenas):
-    cenas = int(cenas)
-    cenas_file= arquivo[cenas]
-    item_file = arquivo_item[cenas]
-    return cenas_file, item_file
+def file_find(cenas, tipo="cena"):
+    if tipo == "cena":
+        cenas = int(cenas)
+        cenas_file = arquivo[cenas]
+        return cenas_file
+    elif tipo == "item":
+        item_file = int(cenas)
+        item_file = arquivo_item[(int(item_file)-1)]
+        return item_file
 
 cena = 0
 
 while True:
     #apresentando a cena
-    cena_atual, items_atual = file_find(cena)
+    cena_atual = file_find(cena)
     cena_atual = com.Cena(cena_atual)
-    items_atual = com.Item(items_atual)
-
+    items_atual = []
+    for i in list(cena_atual.obj_cenario()):
+        if i != " ":
+            items_atual.append(com.Item(file_find(i, tipo="item")))
+            
     print(cena_atual.texto_cena())
-    print(items_atual.texto_item())
+    for i in range(len(items_atual)): print(items_atual[i].texto_item())
 
     #pegando a informaçãod do jogador
     action = input("> ")
@@ -54,6 +60,5 @@ while True:
     #aqui verificamos se é uma ação de coordenada e mudamos para a cena correspondente aquela coordenada
     if action in ['N', 'S', 'L', 'O', 'subir', 'descer']:
         cena = cena_atual.mudar_coord(action)
-        print(cena)
     elif action in ["interações"]: print("")
     else: print("Eu acho que não é possivel fazer isso")

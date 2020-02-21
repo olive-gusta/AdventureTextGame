@@ -34,7 +34,7 @@ class Cena():
                         self.file_cena[5],
                         self.file_cena[6],
                         self.file_cena[7]]
-        self.comandos = self.file_cena[8]
+        self.itens = self.file_cena[8]
 
     def id_cena(self):
         return self.file_cena[0]
@@ -65,7 +65,7 @@ class Cena():
             return self.coords[5]
 
     def obj_cenario(self):
-        return None
+        return self.itens
 
     def interacoes(self, interacao):
         '''
